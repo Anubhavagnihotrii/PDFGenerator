@@ -26,4 +26,4 @@ This project provides a REST API for generating and downloading invoice PDFs usi
     - run the Spring Rest API
     - Go to https://documenter.getpostman.com/view/39581574/2sAY51A1A1
     - Open the above in postman Desktop app (locally).
-    - Read the api doc for Generating and Downloading Invoice Pdf.
+    - Read the above Postman api doc for Generating and Downloading Invoice Pdf.
