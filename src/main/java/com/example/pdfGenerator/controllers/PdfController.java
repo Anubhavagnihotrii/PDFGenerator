@@ -32,8 +32,8 @@ public class PdfController {
         return new ResponseEntity<>(filename, HttpStatus.CREATED);
     }
 
-    @GetMapping("/download/{id}")
-    public ResponseEntity<byte[]> downloadInvoice(@PathVariable long id) {
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> downloadInvoice(@RequestParam("id") long id) {
         String filename = PDF_DIRECTORY + id + "_invoice.pdf";
         File file = new File(filename);
 
