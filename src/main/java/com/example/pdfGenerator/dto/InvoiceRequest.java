@@ -3,6 +3,7 @@ package com.example.pdfGenerator.dto;
 import java.util.List;
 
 public class InvoiceRequest {
+    private Long invoiceId;
     private String seller;
     private String sellerGstin;
     private String sellerAddress;
@@ -65,5 +66,13 @@ public class InvoiceRequest {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public Long getInvoiceId() {
+        return invoiceId;
+    }
+
+    public void setInvoiceId(Long invoiceId) {
+        this.invoiceId = invoiceId;
     }
 }

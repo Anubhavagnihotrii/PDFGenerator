@@ -3,27 +3,54 @@ package com.example.pdfGenerator.controllers;
 import com.example.pdfGenerator.dto.InvoiceRequest;
 import com.example.pdfGenerator.service.PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/invoices")
 public class PdfController {
-    private final PdfService pdfService;
 
     @Autowired
-    public PdfController(PdfService pdfService) {
-        this.pdfService = pdfService;
-    }
+    PdfService pdfService;
+    @Value("${pdf.directory}")
+    private String PDF_DIRECTORY;
 
     @PostMapping("/generate")
-    public ResponseEntity<String> generatePdf(@RequestBody InvoiceRequest request){
-        String pdfFilename = pdfService.generatePdf(request);
-        if(pdfFilename==null){
-            return new ResponseEntity<>("Error in generating PDF", HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<String> generateInvoice(@RequestBody InvoiceRequest request) {
+        String filename = pdfService.generatePdf(request);
+        if (filename == null) {
+            return new ResponseEntity<>("Failed to generate PDF", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return  new ResponseEntity<>("PDF generated Successfully" +pdfFilename,HttpStatus.CREATED);
+        return new ResponseEntity<>(filename, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> downloadInvoice(@PathVariable long id) {
+        String filename = PDF_DIRECTORY + id + "_invoice.pdf";
+        File file = new File(filename);
+
+        if (!file.exists()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        try (InputStream inputStream = new FileInputStream(file)) {
+            byte[] pdfContent = inputStream.readAllBytes();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName());
+
+            return new ResponseEntity<>(pdfContent, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
