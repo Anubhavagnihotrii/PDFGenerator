@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invoice</title>
     <style>
-
         table {
             border-collapse: collapse;
             width: 100%;
@@ -17,17 +16,21 @@
             padding: 8px;
             text-align: left;
         }
+        .total {
+            font-weight: bold;
+            padding-top: 10px;
+        }
     </style>
 </head>
-<body style='font-family: "Cascadia Mono'>
+<body>
 <table>
     <tr>
         <td colspan="2">
-            <strong>Seller:</strong> <span th:text="${seller}"></span><br>
+            <strong>Seller:</strong> <span th:text="${seller}"></span><br />
             <strong>GSTIN:</strong> <span th:text="${sellerGstin}"></span>
         </td>
         <td colspan="2">
-            <strong>Buyer:</strong> <span th:text="${buyer}"></span><br>
+            <strong>Buyer:</strong> <span th:text="${buyer}"></span><br />
             <strong>GSTIN:</strong> <span th:text="${buyerGstin}"></span>
         </td>
     </tr>
@@ -44,7 +47,11 @@
         <td th:text="${item.amount}"></td>
     </tr>
     <tr>
-        <td rowspan="2" colspan="4">&nbsp</td>
+        <td rowspan="2" colspan="4">
+            <div class="total">
+                <p><strong>Total Amount:</strong> <span th:text="${totalAmount}"></span></p>
+            </div>
+        </td>
     </tr>
 </table>
 </body>

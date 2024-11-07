@@ -1,10 +1,12 @@
 package com.example.pdfGenerator.dto;
 
+import java.math.BigDecimal;
+
 public class Item {
     private String name;
-    private String quantity;
-    private double rate;
-    private double amount;
+    private int quantity;
+    private BigDecimal rate;
+    private BigDecimal amount;
 
     public String getName() {
         return name;
@@ -14,27 +16,27 @@ public class Item {
         this.name = name;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public double getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }
