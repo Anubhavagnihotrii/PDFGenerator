@@ -22,15 +22,15 @@
         }
     </style>
 </head>
-<body>
+<body style='font-family: "Cascadia Mono", monospace;'>
 <table>
     <tr>
         <td colspan="2">
-            <strong>Seller:</strong> <span th:text="${seller}"></span><br />
+            <strong>Seller:</strong> <br /> <span th:text="${seller}"></span> <br /><span th:text="${sellerAddress}"></span><br />
             <strong>GSTIN:</strong> <span th:text="${sellerGstin}"></span>
         </td>
         <td colspan="2">
-            <strong>Buyer:</strong> <span th:text="${buyer}"></span><br />
+            <strong>Buyer:</strong> <br /> <span th:text="${buyer}"></span> <br /> <span th:text="${buyerAddress}"></span><br />
             <strong>GSTIN:</strong> <span th:text="${buyerGstin}"></span>
         </td>
     </tr>
@@ -42,7 +42,7 @@
     </tr>
     <tr th:each="item : ${items}">
         <td th:text="${item.name}"></td>
-        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.quantity} +' Nos'"></td>
         <td th:text="${item.rate}"></td>
         <td th:text="${item.amount}"></td>
     </tr>
