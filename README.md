@@ -11,7 +11,7 @@ This project provides a REST API for generating and downloading invoice PDFs usi
 
 ### Prerequisites
 
-- Java 17 or higher should be installed.
+- JDK 22 or higher should be installed.
 - Maven (Optional) `if using intellij not required`
 
 ### Installation
